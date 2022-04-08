@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="my-5">
+  <div class="row product">
+    <div class="col-md-6 mb-4 text-center">
+      <img src="{{ item_data.image.url }}" alt="" class="img-fluid" />
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body px-2 py-1">
+          <h3>{{ item_data.title }}</h3>
+          <p class="mb-3">{{ item_data.category }}</p>
+          <hr />
+          <p>
+            価格：<span class="text-danger font-weight-bold"
+              >{{ item_data.price }}円</span
+            >
+          </p>
+          <p class="font-weight-bold">商品説明</p>
+          <!-- linebreaksbrで改行を認識するように設定 -->
+          <p>{{ item_data.description|linebreaksbr }}</p>
+          <a class="btn btn-primary" href="{% url 'additem' item_data.slug %}">カートに入れる</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

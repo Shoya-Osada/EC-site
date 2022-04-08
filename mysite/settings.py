@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,13 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks', # 追加
-    'app', # 追加
-    'accounts', # 追加
-    'django.contrib.sites', # 追加
-    'allauth', # 追加
-    'allauth.account', # 追加
-    'allauth.socialaccount' # 追加
+    'widget_tweaks', 
+    'app', 
+    'accounts', 
+    'django.contrib.sites', 
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount' 
 ]
 
 SITE_ID = 1
@@ -131,9 +132,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# 一番下に追加
 AUTH_USER_MODEL = 'accounts.CustomUser'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+
+# 画像を使用できるよう設定。
+#画像のアップロード先を指定
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# テストが完了したら、環境変数にする
+#stripe(決済システム)のシークレットキー
+STRIPE_SECRET_KEY = 'sk_test_51KjEeGFvivXZ8s94Wg3Xqtx4zjWXJHbXyaSwhbR2ImexaFaN0eBkHER4JuWHfXKESa16eF9mrlf9XSIYRtdfjfCG009GHarH6I'

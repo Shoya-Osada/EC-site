@@ -1,4 +1,4 @@
-{% load static %}
+{% load cart_tags %}{% load static %}
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -10,12 +10,13 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <title>カスタム認証チュートリアル</title>
+    <title>ECサイト</title>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
+        <a class="navbar-brand" href="/">ECサイト</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="/">ホーム</a>
@@ -23,6 +24,15 @@
           {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profile' %}">プロフィール</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'order' %}">
+              カート
+              <span class="badge badge-pill badge-warning">
+                <!-- テンプレートタグで作成したitemCount関数を呼び出すことで、注文アイテムの個数を取得。-->
+                {{ request.user|itemCount }}
+              </span>
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
@@ -48,7 +58,7 @@
         Copyright &copy; Django Startup 2020
       </p>
     </footer>
-
+    <!-- 一部の画面のみ JavaScript を使用したいので、JavaScript 用のブロックを設定 -->
     {% block extra_js %} {% endblock %}
   </body>
 </html>
